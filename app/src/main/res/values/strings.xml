@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TipCalculator</string>
+    <string name="title">Tip Calculator</string>
+    <string name="baseTitle">Base</string>
+    <string name="baseHint">Enter the amount</string>
+    <string-array name="tipRating">
+        <item>Poor</item>
+        <item>Acceptable</item>
+        <item>Good</item>
+        <item>Amazing</item>
+    </string-array>
+    <string name="tipTitle">Tip</string>
+    <string name="totalTitle">Total</string>
+    <string name="madeBy">Made By Logan Hendry</string>
+</resources>
