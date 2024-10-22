@@ -59,13 +59,24 @@ public class MainActivity extends AppCompatActivity {
                 setProgressText();
                 setRatingText();
 
-                //set the tip amount text
-                float tip = calculateTip();
-                tipAmount.setText("$ " + String.valueOf(tip));
+                // Check if the base amount is empty before calculating
+                if (!baseAmount.getText().toString().isEmpty())
+                {
+                    //set the tip amount text
+                    float tip = calculateTip();
+                    tipAmount.setText("$ " + String.valueOf(tip));
 
-                //set the total amount text
-                float total = calculateTotal(tip);
-                totalAmount.setText("$ " + String.valueOf(total));
+                    //set the total amount text
+                    float total = calculateTotal(tip);
+                    totalAmount.setText("$ " + String.valueOf(total));
+                }
+                else
+                {
+                    //Clear the tip and total amount texts if the base amount is empty
+                    tipAmount.setText("");
+                    totalAmount.setText("");
+                }
+
             }
 
             @Override
@@ -80,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (baseAmount.getText().toString().isEmpty())
                 {
-                    Toast.makeText(MainActivity.this, "The base amount cannot be empty", Toast.LENGTH_SHORT).show();
                     tipPercentBar.setProgress(15);
                 }
                 else
@@ -101,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                if (baseAmount.getText().toString().isEmpty())
+                {
+                    Toast.makeText(MainActivity.this, "The base amount cannot be empty", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -148,6 +161,12 @@ public class MainActivity extends AppCompatActivity {
     //method to change the value of the tip amount
     public float calculateTip()
     {
+        //check to see if the editText is empty when deleting the string
+        String baseAmountString = baseAmount.getText().toString();
+        if (baseAmountString.isEmpty()) {
+            return 0;
+        }
+
         //get the base amount
         basePrice = Float.parseFloat(baseAmount.getText().toString());
         seekBarProgress = tipPercentBar.getProgress();
@@ -163,6 +182,12 @@ public class MainActivity extends AppCompatActivity {
     //method to change the value of the total amount
     public float calculateTotal(float finalTip)
     {
+        //check to see if the editText is empty when deleting the string
+        String baseAmountString = baseAmount.getText().toString();
+        if (baseAmountString.isEmpty()) {
+            return 0;
+        }
+
         //get the base amount
         basePrice = Float.parseFloat(baseAmount.getText().toString());
         seekBarProgress = tipPercentBar.getProgress();
