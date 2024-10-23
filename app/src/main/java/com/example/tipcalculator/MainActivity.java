@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     //Clear the tip and total amount texts if the base amount is empty
                     tipAmount.setText("");
                     totalAmount.setText("");
+                    Toast.makeText(MainActivity.this, "Base amount cannot be empty", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     public void setRatingText()
     {
         seekBarProgress = tipPercentBar.getProgress();
-        if(seekBarProgress <= 10)
+        if(seekBarProgress <= 9)
         {
             tipRating.setText(ratings[0]);
             tipRating.setTextColor(ContextCompat.getColor(this, R.color.red));
